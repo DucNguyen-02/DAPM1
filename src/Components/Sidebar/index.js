@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Sidebar.module.scss'
 import classNames from 'classnames/bind'
-import { LOGO, PERSON } from '../../assets/images'
+import { BACKGROUND_SIDEBAR, LOGO, PERSON } from '../../assets/images'
 import { Link } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
@@ -9,6 +9,11 @@ const cx = classNames.bind(styles)
 const Sidebar = () => {
     return (
         <div className={cx('wrapper')}>
+            <img
+                className={cx('backgroundimg')}
+                src={BACKGROUND_SIDEBAR}
+                alt=""
+            />
             <div className={cx('content')}>
                 <Link to="/" className={cx('content-logo')}>
                     <img src={LOGO} alt="" />

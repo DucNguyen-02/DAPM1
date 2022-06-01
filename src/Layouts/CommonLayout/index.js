@@ -3,6 +3,7 @@ import classNames from 'classnames/bind'
 import styles from './CommonLayout.module.scss'
 import Header from '../../Components/Header'
 import Sidebar from '../../Components/Sidebar'
+import { BACKGROUND_CONTENT } from '../../assets/images'
 
 const cx = classNames.bind(styles)
 
@@ -12,6 +13,11 @@ const CommonLayout = ({ children }) => {
             <Sidebar />
             <div className={cx('container')}>
                 <Header />
+                <img
+                    className={cx('backgroundimg')}
+                    src={BACKGROUND_CONTENT}
+                    alt=""
+                />
                 <div className={cx('content')}>{children}</div>
             </div>
         </div>
