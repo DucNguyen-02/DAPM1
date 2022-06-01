@@ -1,0 +1,5 @@
+export { default as MAIL } from './mail.png'
+export { default as NOTIFICATION } from './notification.png'
+export { default as AVATAR } from './avt.jpg'
+export { default as LOGO } from './logo.png'
+export { default as PERSON } from './person.png'
