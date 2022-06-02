@@ -12,3 +12,10 @@
     bottom: 0;
     width: 120px;
 }
+
+.content {
+    width: 100%;
+    height: calc(100vh - 45px);
+    padding: 20px 24px;
+    z-index: 10;
+}
