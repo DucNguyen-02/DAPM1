@@ -1,0 +1,38 @@
+.wrapper {
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    & img {
+        width: 20px;
+        margin-right: 6px;
+    }
+}
+
+.select {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    &-buttons {
+    }
+
+    &-button {
+        border-radius: 20px;
+    }
+
+    &-btn {
+        margin-right: 30px;
+        border: none;
+        outline: none;
+        padding: 4px 12px;
+        font-size: 14px;
+    }
+
+    &-addnew {
+        background-color: #03a400;
+        color: #fff;
+        border-radius: 4px;
+    }
+}
