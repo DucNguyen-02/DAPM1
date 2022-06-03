@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Modal from '../Modal/Modal'
 import classNames from 'classnames/bind'
 import styles from './RegisterModal.module.scss'
@@ -41,6 +41,7 @@ const RegisterModal = ({ toggleModal }) => {
     const onSubmit = (data) => {
         console.log(data)
     }
+
     return (
         <Modal>
             <div className={cx('wrapper')}>
