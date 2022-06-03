@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './InfoTable.module.scss'
 import classNames from 'classnames/bind'
 import { useTable } from 'react-table/dist/react-table.development'
+import UserDetailModal from '../UserDetailModal/UserDetailModal'
 
 const cx = classNames.bind(styles)
 
 const InfoTable = ({ columns, data }) => {
+    const [isDetail, setIsDetail] = useState(false)
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
         useTable({ columns, data })
 
+    const handleRowItemClick = () => {
+        setIsDetail(true)
+    }
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -48,6 +53,7 @@ const InfoTable = ({ columns, data }) => {
                                     {...row.getRowProps()}
                                     key={row.id}
                                     className="table-row"
+                                    onClick={() => handleRowItemClick()}
                                 >
                                     {row.cells.map((cell) => {
                                         return (
@@ -77,6 +83,7 @@ const InfoTable = ({ columns, data }) => {
                     </tbody>
                 </table>
             </div>
+            {isDetail && <UserDetailModal toggleDetail={setIsDetail} />}
         </div>
     )
 }

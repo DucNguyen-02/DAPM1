@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Modal from '../Modal/Modal'
 import classNames from 'classnames/bind'
 import styles from './RegisterModal.module.scss'
