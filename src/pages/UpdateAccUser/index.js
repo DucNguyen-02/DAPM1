@@ -1,14 +1,68 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from './UpdateAccUser.module.scss'
 import { PERSON } from '../../assets/images'
 import RegisterModal from '../../Components/RegisterModal/RegisterModal'
 import useToggle from '../../hooks/useTogge'
+import InfoTable from '../../Components/InfoTable/InfoTable'
 
 const cx = classNames.bind(styles)
 
 const UpdateAccUser = () => {
     const [isToggleModal, setIsToggleModal] = useState(false)
+
+    const data = useMemo(
+        () => [
+            {
+                col1: 'Hello',
+                col2: 'World',
+                col3: 'World',
+                col4: 'World',
+                col5: 'World',
+            },
+            {
+                col1: 'Hello',
+                col2: 'World',
+                col3: 'World',
+                col4: 'World',
+                col5: 'World',
+            },
+            {
+                col1: 'Hello',
+                col2: 'World',
+                col3: 'World',
+                col4: 'World',
+                col5: 'World',
+            },
+        ],
+        []
+    )
+
+    const columns = React.useMemo(
+        () => [
+            {
+                Header: 'STT',
+                accessor: 'col1', // accessor is the "key" in the data
+            },
+            {
+                Header: 'Tài khoản',
+                accessor: 'col2',
+            },
+            {
+                Header: 'Họ và tên',
+                accessor: 'col3',
+            },
+            {
+                Header: 'Tình trạng',
+                accessor: 'col4',
+            },
+            {
+                Header: 'Thao tác',
+                accessor: 'col5',
+            },
+        ],
+        []
+    )
 
     const handleToggleModal = () => {
         setIsToggleModal(true)
@@ -29,7 +83,9 @@ const UpdateAccUser = () => {
                     <button className={cx('select-btn', 'select-button')}>
                         Chủ nơi cư trú
                     </button>
-                    <button className={cx('select-btn', 'select-button')}>
+                    <button
+                        className={cx('select-btn', 'active', 'select-button')}
+                    >
                         Cán bộ
                     </button>
                 </div>
@@ -39,6 +95,9 @@ const UpdateAccUser = () => {
                 >
                     Thêm mới
                 </button>
+            </div>
+            <div className={cx('content')}>
+                <InfoTable columns={columns} data={data} />
             </div>
             {isToggleModal && <RegisterModal toggleModal={setIsToggleModal} />}
         </div>
