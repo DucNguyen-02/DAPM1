@@ -3,7 +3,8 @@
     width: 100%;
     border-spacing: 0px 12px;
     border-collapse: separate;
-
+    border-radius: 8px;
+    background-color: #fff;
     &-head {
         color: #197bbd;
         font-size: 14px;
@@ -17,11 +18,22 @@
     }
 
     &-body {
-        & tr {
-            height: 30px;
-        }
         & tr:nth-child(2n + 1) {
             background-color: #f8ecec;
         }
+        & tr {
+            cursor: pointer;
+            height: 30px;
+
+            &:hover {
+                background-color: red;
+            }
+        }
     }
+}
+
+.wrapper {
+}
+
+.container {
 }
