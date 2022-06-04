@@ -3,6 +3,8 @@ import UpdateAccUser from '../pages/UpdateAccUser'
 import ChangePassword from '../pages/ChangePassword'
 import Statistic from '../pages/Statistic'
 import SearchInfo from '../pages/SearchInfo'
+import Login from '../pages/Login'
+import BlankLayout from '../Layouts/BlankLayout'
 
 const publicRoutes = [
     {
@@ -24,6 +26,11 @@ const publicRoutes = [
     {
         path: '/searchinfo',
         component: SearchInfo,
+    },
+    {
+        path: '/login',
+        component: Login,
+        layout: BlankLayout,
     },
 ]
 
