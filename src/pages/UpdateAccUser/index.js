@@ -1,15 +1,15 @@
-import React, { useMemo, useState } from 'react'
 import classNames from 'classnames/bind'
-import styles from './UpdateAccUser.module.scss'
+import React, { useMemo, useState } from 'react'
 import { PERSON } from '../../assets/images'
-import RegisterModal from '../../Components/RegisterModal/RegisterModal'
-import useToggle from '../../hooks/useTogge'
 import InfoTable from '../../Components/InfoTable/InfoTable'
+import RegisterModal from '../../Components/RegisterModal/RegisterModal'
+import styles from './UpdateAccUser.module.scss'
 
 const cx = classNames.bind(styles)
 
 const UpdateAccUser = () => {
     const [isToggleModal, setIsToggleModal] = useState(false)
+    const [indexButton, setIndexButton] = useState(0)
 
     const data = useMemo(
         () => [
@@ -18,35 +18,30 @@ const UpdateAccUser = () => {
                 col2: 'World',
                 col3: 'World',
                 col4: 'World',
-                col5: 'World',
             },
             {
                 col1: 'Hello',
                 col2: 'World',
                 col3: 'World',
                 col4: 'World',
-                col5: 'World',
             },
             {
                 col1: 'Hello',
                 col2: 'World',
                 col3: 'World',
                 col4: 'World',
-                col5: 'World',
             },
             {
                 col1: 'Hello',
                 col2: 'World',
                 col3: 'World',
                 col4: 'World',
-                col5: 'World',
             },
             {
                 col1: 'Hello',
                 col2: 'World',
                 col3: 'World',
                 col4: 'World',
-                col5: 'World',
             },
         ],
         []
@@ -70,13 +65,24 @@ const UpdateAccUser = () => {
                 Header: 'Tình trạng',
                 accessor: 'col4',
             },
-            {
-                Header: 'Thao tác',
-                accessor: 'col5',
-            },
         ],
         []
     )
+
+    const buttons = [
+        {
+            id: 1,
+            title: 'Người nước ngoài',
+        },
+        {
+            id: 2,
+            title: 'Chủ nơi cư trú',
+        },
+        {
+            id: 3,
+            title: 'Cán bộ',
+        },
+    ]
 
     const handleToggleModal = () => {
         setIsToggleModal(true)
@@ -91,7 +97,7 @@ const UpdateAccUser = () => {
             <div className={cx('select')}>
                 <h4 className={cx('select-title')}>Danh sách người dùng</h4>
                 <div className={cx('select-buttons')}>
-                    <button className={cx('select-btn', 'select-button')}>
+                    {/* <button className={cx('select-btn', 'select-button')}>
                         Người nước ngoài
                     </button>
                     <button className={cx('select-btn', 'select-button')}>
@@ -101,8 +107,26 @@ const UpdateAccUser = () => {
                         className={cx('select-btn', 'active', 'select-button')}
                     >
                         Cán bộ
-                    </button>
+                    </button> */}
+                    {buttons.map((item, index) => {
+                        return (
+                            <button
+                                key={index}
+                                onClick={() => {
+                                    setIndexButton(index)
+                                }}
+                                className={cx(
+                                    'select-btn',
+                                    'select-button',
+                                    index === indexButton ? 'active' : ''
+                                )}
+                            >
+                                {item.title}
+                            </button>
+                        )
+                    })}
                 </div>
+
                 <button
                     onClick={handleToggleModal}
                     className={cx('select-btn', 'select-addnew')}

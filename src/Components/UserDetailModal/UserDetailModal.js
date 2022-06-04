@@ -22,7 +22,7 @@ const UserDetailModal = ({ toggleDetail }) => {
                         <button
                             className={cx(
                                 'header-title-item',
-                                'header-title-item-active'
+                                isDetail ? 'header-title-item-active' : ''
                             )}
                             onClick={() => {
                                 changeForm()
@@ -31,7 +31,10 @@ const UserDetailModal = ({ toggleDetail }) => {
                             Tài khoản người dùng
                         </button>
                         <button
-                            className={cx('header-title-item')}
+                            className={cx(
+                                'header-title-item',
+                                isDetail ? '' : 'header-title-item-active'
+                            )}
                             onClick={() => {
                                 changeForm()
                             }}
