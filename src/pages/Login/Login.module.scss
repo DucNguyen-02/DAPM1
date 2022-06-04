@@ -1,0 +1,49 @@
+.wrapper {
+}
+
+.content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    font-size: 14px;
+
+    .title {
+        text-align: center;
+        text-transform: uppercase;
+        margin: 10px 0;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    & img {
+        height: 100px;
+        width: 100px;
+        margin: auto;
+    }
+
+    & input {
+        font-size: 14px;
+    }
+
+    & label {
+        font-weight: 600;
+    }
+
+    .login-btn {
+        margin: auto;
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        background-color: green;
+        color: #fff;
+        width: 100%;
+        margin-top: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .form-wrapper {
+        margin-bottom: 10px;
+    }
+}
