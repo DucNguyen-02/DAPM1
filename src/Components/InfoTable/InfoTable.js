@@ -8,11 +8,13 @@ const cx = classNames.bind(styles)
 
 const InfoTable = ({ columns, data }) => {
     const [isDetail, setIsDetail] = useState(false)
+    const [userIdDetail, setUserIdDetail] = useState()
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
         useTable({ columns, data })
 
-    const handleRowItemClick = () => {
+    const handleRowItemClick = (idUser) => {
         setIsDetail(true)
+        setUserIdDetail(idUser)
     }
     return (
         <div className={cx('wrapper')}>
@@ -53,7 +55,9 @@ const InfoTable = ({ columns, data }) => {
                                     {...row.getRowProps()}
                                     key={row.id}
                                     className="table-row"
-                                    onClick={() => handleRowItemClick()}
+                                    onClick={() =>
+                                        handleRowItemClick(row.original.maCanBo)
+                                    }
                                 >
                                     {row.cells.map((cell) => {
                                         return (
@@ -83,7 +87,12 @@ const InfoTable = ({ columns, data }) => {
                     </tbody>
                 </table>
             </div>
-            {isDetail && <UserDetailModal toggleDetail={setIsDetail} />}
+            {isDetail && (
+                <UserDetailModal
+                    toggleDetail={setIsDetail}
+                    userIdDetail={userIdDetail}
+                />
+            )}
         </div>
     )
 }

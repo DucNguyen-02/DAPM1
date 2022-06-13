@@ -13,7 +13,7 @@ const schema = yup.object().shape({
     reason: yup.string().required(),
 })
 
-const BlockForm = ({ toggleDetail }) => {
+const BlockForm = ({ toggleDetail, user }) => {
     const {
         register,
         handleSubmit,
@@ -41,6 +41,7 @@ const BlockForm = ({ toggleDetail }) => {
                             className="form-control"
                             type="text"
                             {...register('fullnameBlock')}
+                            value={user && user.hoTen}
                         />
                         {
                             <h6 className="text-danger form-text text-capitalize">
@@ -54,6 +55,7 @@ const BlockForm = ({ toggleDetail }) => {
                             className="form-control"
                             type="text"
                             {...register('usernameBlock')}
+                            value={user && user.tenTaiKhoan}
                         />
                         {
                             <h6 className="text-danger form-text text-capitalize">

@@ -9,11 +9,13 @@ const cx = classNames.bind(styles)
 
 const Home = () => {
     const navigate = useNavigate()
+
     useEffect(() => {
         if (!getDataFromLocalStorage()) {
             navigate('/login')
         }
     }, [])
+
     return (
         <div className={cx('wrapper ')}>
             <div className={cx('content')}>

@@ -33,6 +33,7 @@ const Login = () => {
             addDataToLocalStorate(data)
             navigation('/', { replace: true })
         } else {
+            reset()
             setIsSuccess(false)
         }
     }

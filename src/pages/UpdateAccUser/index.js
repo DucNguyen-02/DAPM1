@@ -1,5 +1,7 @@
+import axios from 'axios'
 import classNames from 'classnames/bind'
 import React, { useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import { PERSON } from '../../assets/images'
 import InfoTable from '../../Components/InfoTable/InfoTable'
 import RegisterModal from '../../Components/RegisterModal/RegisterModal'
@@ -10,60 +12,44 @@ const cx = classNames.bind(styles)
 const UpdateAccUser = () => {
     const [isToggleModal, setIsToggleModal] = useState(false)
     const [indexButton, setIndexButton] = useState(0)
+    const [listUser, setListUser] = useState([])
 
-    const data = useMemo(
-        () => [
-            {
-                col1: 'Hello',
-                col2: 'World',
-                col3: 'World',
-                col4: 'World',
-            },
-            {
-                col1: 'Hello',
-                col2: 'World',
-                col3: 'World',
-                col4: 'World',
-            },
-            {
-                col1: 'Hello',
-                col2: 'World',
-                col3: 'World',
-                col4: 'World',
-            },
-            {
-                col1: 'Hello',
-                col2: 'World',
-                col3: 'World',
-                col4: 'World',
-            },
-            {
-                col1: 'Hello',
-                col2: 'World',
-                col3: 'World',
-                col4: 'World',
-            },
-        ],
-        []
-    )
+    const fetchUser = async () => {
+        let param = ''
+        if (indexButton === 0) {
+            param = 'cbql'
+        } else if (indexButton === 1) {
+            param = 'cnct'
+        } else if (indexButton === 2) {
+            param = 'nnn'
+        }
+
+        const resp = await fetch(`http://127.0.0.1:3000/${param}`)
+        const data = await resp.json()
+        setListUser(data)
+    }
+
+    useEffect(() => {
+        fetchUser()
+    }, [indexButton])
 
     const columns = React.useMemo(
         () => [
             {
-                Header: 'STT',
-                accessor: 'col1', // accessor is the "key" in the data
+                Header: 'CMND/CCCD',
+                accessor: 'CMND', // accessor is the "key" in the data
             },
             {
                 Header: 'Tài khoản',
-                accessor: 'col2',
+                accessor: 'tenTaiKhoan',
             },
             {
                 Header: 'Họ và tên',
-                accessor: 'col3',
+                accessor: 'hoTen',
             },
             {
                 Header: 'Tình trạng',
-                accessor: 'col4',
+                accessor: 'trangThaiTaiKhoan',
             },
         ],
         []
@@ -72,7 +58,7 @@ const UpdateAccUser = () => {
     const buttons = [
         {
             id: 1,
-            title: 'Người nước ngoài',
+            title: 'Cán bộ',
         },
         {
             id: 2,
@@ -80,7 +66,7 @@ const UpdateAccUser = () => {
         },
         {
             id: 3,
-            title: 'Cán bộ',
+            title: 'Người nước ngoài',
         },
     ]
 
@@ -97,17 +83,6 @@ const UpdateAccUser = () => {
             <div className={cx('select')}>
                 <h4 className={cx('select-title')}>Danh sách người dùng</h4>
                 <div className={cx('select-buttons')}>
-                    {/* <button className={cx('select-btn', 'select-button')}>
-                        Người nước ngoài
-                    </button>
-                    <button className={cx('select-btn', 'select-button')}>
-                        Chủ nơi cư trú
-                    </button>
-                    <button
-                        className={cx('select-btn', 'active', 'select-button')}
-                    >
-                        Cán bộ
-                    </button> */}
                     {buttons.map((item, index) => {
                         return (
                             <button
@@ -135,7 +110,7 @@ const UpdateAccUser = () => {
                 </button>
             </div>
             <div className={cx('content')}>
-                <InfoTable columns={columns} data={data} />
+                <InfoTable columns={columns} data={listUser} />
             </div>
             {isToggleModal && <RegisterModal toggleModal={setIsToggleModal} />}
         </div>

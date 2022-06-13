@@ -4,11 +4,24 @@ import classNames from 'classnames/bind'
 import Modal from '../Modal/Modal'
 import DetailForm from '../DetailForm/DetailForm'
 import BlockForm from '../BlockForm/BlockForm'
+import { useEffect } from 'react'
+import { setLocale } from 'yup'
 
 const cx = classNames.bind(styles)
 
-const UserDetailModal = ({ toggleDetail }) => {
+const UserDetailModal = ({ toggleDetail, userIdDetail }) => {
     const [isDetail, setIsDetail] = useState(true)
+    const [user, setUser] = useState()
+
+    const fetchUserByID = async () => {
+        const resp = await fetch(`http://localhost:3000/cbql/${userIdDetail}`)
+        const data = await resp.json()
+        setUser(data)
+    }
+
+    useEffect(() => {
+        fetchUserByID()
+    }, [userIdDetail])
 
     const changeForm = () => {
         setIsDetail(!isDetail)
@@ -46,9 +59,9 @@ const UserDetailModal = ({ toggleDetail }) => {
                 </div>
                 <div className="content-wrapper">
                     {isDetail ? (
-                        <DetailForm toggleDetail={toggleDetail} />
+                        <DetailForm toggleDetail={toggleDetail} user={user} />
                     ) : (
-                        <BlockForm toggleDetail={toggleDetail} />
+                        <BlockForm toggleDetail={toggleDetail} user={user} />
                     )}
                 </div>
             </div>

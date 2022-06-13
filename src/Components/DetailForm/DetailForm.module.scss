@@ -1,6 +1,5 @@
 .wrapper {
-    width: 35vw;
-    min-height: 55vh;
+    width: 45vw;
     background-color: aliceblue;
     border-radius: 12px;
 }
@@ -23,13 +22,8 @@
     &-wrapper {
         margin-bottom: 10px;
 
-        & input {
-            flex: 1;
-            font-size: 14px;
-        }
-
-        & label {
-            width: 80px;
+        & .label {
+            min-width: 100px;
             font-size: 14px;
             font-weight: 500;
         }
@@ -57,5 +51,13 @@
         &-close {
             background-color: #b90000;
         }
+    }
+
+    &-detail {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .container {
     }
 }
