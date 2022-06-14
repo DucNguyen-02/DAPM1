@@ -34,8 +34,7 @@ const renderDataTable = (cell, header) => {
     }
 }
 
-const InfoTable = ({ columns, data, setRefresh }) => {
-    const [isDetail, setIsDetail] = useState(false)
+const InfoTable = ({ columns, data, isDetail, setIsDetail }) => {
     const [userIdDetail, setUserIdDetail] = useState()
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
         useTable({ columns, data })

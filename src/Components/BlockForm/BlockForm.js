@@ -20,6 +20,16 @@ const BlockForm = ({ toggleDetail, user }) => {
         toggleDetail(false)
     }
 
+    const handleUnblock = async (id, e) => {
+        e.preventDefault()
+        const data = { trangThaiTaiKhoan: 'Đang hoạt động' }
+
+        const resp = await axios.put(`http://127.0.0.1:3000/cbql/${id}`, data)
+        console.log(resp)
+
+        toggleDetail(false)
+    }
+
     return (
         <form className={cx('content')}>
             <div className="container">
@@ -43,6 +53,20 @@ const BlockForm = ({ toggleDetail, user }) => {
                         />
                     </div>
                     <div className={cx('content-wrapper')}>
+                        <label className="form-label">Trạng thái</label>
+                        <input
+                            style={
+                                user.trangThaiTaiKhoan === 'Đang hoạt động'
+                                    ? { color: 'green' }
+                                    : { color: 'red' }
+                            }
+                            disabled
+                            className="form-control"
+                            type="text"
+                            value={user && user.trangThaiTaiKhoan}
+                        />
+                    </div>
+                    <div className={cx('content-wrapper')}>
                         <label className="form-label">Lý do</label>
                         <select
                             className="form-control"
@@ -56,14 +80,25 @@ const BlockForm = ({ toggleDetail, user }) => {
                 </div>
             </div>
             <div className={cx('content-btns')}>
-                <button
-                    onClick={(e) => {
-                        handleBlock(user.maCanBo, e)
-                    }}
-                    className={cx('content-btn', 'content-btn-save')}
-                >
-                    Lưu
-                </button>
+                {user.trangThaiTaiKhoan === 'Đang hoạt động' ? (
+                    <button
+                        onClick={(e) => {
+                            handleBlock(user.maCanBo, e)
+                        }}
+                        className={cx('content-btn', 'content-btn-save')}
+                    >
+                        Khóa
+                    </button>
+                ) : (
+                    <button
+                        onClick={(e) => {
+                            handleUnblock(user.maCanBo, e)
+                        }}
+                        className={cx('content-btn', 'content-btn-save')}
+                    >
+                        Mở khóa
+                    </button>
+                )}
                 <button
                     className={cx('content-btn', 'content-btn-close')}
                     onClick={() => {

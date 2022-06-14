@@ -12,6 +12,7 @@ const UpdateAccUser = () => {
     const [isToggleModal, setIsToggleModal] = useState(false)
     const [indexButton, setIndexButton] = useState(0)
     const [listUser, setListUser] = useState([])
+    const [isDetail, setIsDetail] = useState(false)
 
     const fetchUser = async () => {
         let param = ''
@@ -29,7 +30,7 @@ const UpdateAccUser = () => {
 
     useEffect(() => {
         fetchUser()
-    }, [indexButton, isToggleModal])
+    }, [indexButton, isDetail])
 
     const columns = [
         React.useMemo(
@@ -152,7 +153,12 @@ const UpdateAccUser = () => {
                 </button>
             </div>
             <div className={cx('content')}>
-                <InfoTable columns={columns[indexButton]} data={listUser} />
+                <InfoTable
+                    columns={columns[indexButton]}
+                    data={listUser}
+                    isDetail={isDetail}
+                    setIsDetail={setIsDetail}
+                />
             </div>
             {isToggleModal && <RegisterModal toggleModal={setIsToggleModal} />}
         </div>
