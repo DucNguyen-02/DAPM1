@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import classNames from 'classnames/bind'
-import styles from './Login.module.scss'
-import { LOGO } from '../../assets/images'
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import classNames from 'classnames/bind'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import addDataToLocalStorate from '../../helper/addDataToLocalStorage'
 import { useNavigate } from 'react-router-dom'
+import * as yup from 'yup'
+import { LOGO } from '../../assets/images'
+import addDataToLocalStorage from '../../helper/addDataToLocalStorage'
+import styles from './Login.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -30,7 +30,7 @@ const Login = () => {
 
     const onSubmit = (data) => {
         if (data.username === 'admin' && data.password === 'admin') {
-            addDataToLocalStorate(data)
+            addDataToLocalStorage(data)
             navigation('/', { replace: true })
         } else {
             reset()

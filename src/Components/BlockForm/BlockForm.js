@@ -1,72 +1,50 @@
-import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
+
 import classNames from 'classnames/bind'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
 import styles from './BlockForm.module.scss'
 
 const cx = classNames.bind(styles)
 
-const schema = yup.object().shape({
-    fullnameBlock: yup.string().required(),
-    usernameBlock: yup.string().required(),
-    reason: yup.string().required(),
-})
-
 const BlockForm = ({ toggleDetail, user }) => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm({
-        resolver: yupResolver(schema),
-    })
-
     const handleCloseModal = () => {
         toggleDetail(false)
     }
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const handleBlock = async (id, e) => {
+        e.preventDefault()
+        const data = { trangThaiTaiKhoan: 'Bị khóa' }
+
+        const resp = await axios.put(`http://127.0.0.1:3000/cbql/${id}`, data)
+        console.log(resp)
+
+        toggleDetail(false)
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={cx('content')}>
+        <form className={cx('content')}>
             <div className="container">
                 <div className="row">
                     <div className={cx('content-wrapper')}>
                         <label className="form-label">Họ tên</label>
                         <input
+                            disabled
                             className="form-control"
                             type="text"
-                            {...register('fullnameBlock')}
                             value={user && user.hoTen}
                         />
-                        {
-                            <h6 className="text-danger form-text text-capitalize">
-                                {errors.fullnameBlock?.message}
-                            </h6>
-                        }
                     </div>
                     <div className={cx('content-wrapper')}>
                         <label className="form-label">Tài khoản</label>
                         <input
+                            disabled
                             className="form-control"
                             type="text"
-                            {...register('usernameBlock')}
                             value={user && user.tenTaiKhoan}
                         />
-                        {
-                            <h6 className="text-danger form-text text-capitalize">
-                                {errors.usernameBlock?.message}
-                            </h6>
-                        }
                     </div>
                     <div className={cx('content-wrapper')}>
                         <label className="form-label">Lý do</label>
                         <select
-                            {...register('reason')}
                             className="form-control"
                             name="reason"
                             id="reason"
@@ -74,16 +52,16 @@ const BlockForm = ({ toggleDetail, user }) => {
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
-                        {
-                            <h6 className="text-danger form-text text-capitalize">
-                                {errors.reason?.message}
-                            </h6>
-                        }
                     </div>
                 </div>
             </div>
             <div className={cx('content-btns')}>
-                <button className={cx('content-btn', 'content-btn-save')}>
+                <button
+                    onClick={(e) => {
+                        handleBlock(user.maCanBo, e)
+                    }}
+                    className={cx('content-btn', 'content-btn-save')}
+                >
                     Lưu
                 </button>
                 <button

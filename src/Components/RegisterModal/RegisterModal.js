@@ -6,21 +6,21 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
 
 const cx = classNames.bind(styles)
 
 const schema = yup.object().shape({
-    fullname: yup.string().required(),
-    dob: yup.string().required(),
-    username: yup.string().required(),
-    gender: yup.string().required(),
-    password: yup.string().required(),
-    phone: yup
-        .string()
-        .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'invalid Phone number'),
-    email: yup.string().required(),
-    CMND: yup.string().required(),
-    workPlace: yup.string().required(),
+    // fullname: yup.string().required(),
+    // dob: yup.string().required(),
+    // username: yup.string().required(),
+    // gender: yup.string().required(),
+    // password: yup.string().required(),
+    // phone: yup
+    //     .string()
+    //     .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'invalid Phone number'),
+    // email: yup.string().required(),
+    // CMND: yup.string().required(),
 })
 
 const RegisterModal = ({ toggleModal }) => {
@@ -38,8 +38,28 @@ const RegisterModal = ({ toggleModal }) => {
         toggleModal(false)
     }
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        await axios
+            .post('http://127.0.0.1:3000/cbql', {
+                maCanBo: 'CBQL0003',
+                hoTen: data.fullname,
+                ngaySinh: data.dob,
+                gioiTinh: data.gender,
+                soDienThoai: data.phone,
+                email: data.email,
+                CMND: data.CMND,
+                maPhuongXa: 'PX001',
+                diaChi: 'DN',
+                tenTaiKhoan: data.username,
+                matKhau: data.password,
+                trangThaiTaiKhoan: 'OK',
+            })
+            .then(function (response) {
+                handleCancelForm()
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
     }
 
     return (
@@ -194,23 +214,6 @@ const RegisterModal = ({ toggleModal }) => {
                                 {
                                     <h6 className="text-danger form-text text-capitalize">
                                         {errors.CMND?.message}
-                                    </h6>
-                                }
-                            </div>
-                            <div className="workPlace col-md-6">
-                                <label
-                                    className={cx('form-label', 'row-label')}
-                                >
-                                    Nơi làm việc:{' '}
-                                </label>
-                                <input
-                                    className="form-control"
-                                    name="workPlace"
-                                    {...register('workPlace')}
-                                />
-                                {
-                                    <h6 className="text-danger form-text text-capitalize">
-                                        {errors.workPlace?.message}
                                     </h6>
                                 }
                             </div>

@@ -1,7 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { publicRoutes } from './routes'
-import CommonLayout from './Layouts/CommonLayout'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
 import BlankLayout from './Layouts/BlankLayout'
+import CommonLayout from './Layouts/CommonLayout'
+import { publicRoutes } from './routes'
+import PrivateRouter from './routes/PrivateRouter'
 
 function App() {
     return (
@@ -18,7 +21,9 @@ function App() {
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <Page />
+                                        <PrivateRouter>
+                                            <Page />
+                                        </PrivateRouter>
                                     </Layout>
                                 }
                             />

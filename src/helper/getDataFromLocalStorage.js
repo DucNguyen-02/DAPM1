@@ -1,5 +1,5 @@
 const getDataFromLocalStorage = () => {
-    const isLogin = localStorage.getItem('isLogin')
+    const isLogin = JSON.parse(localStorage.getItem('isLogin'))
     return isLogin
 }
 

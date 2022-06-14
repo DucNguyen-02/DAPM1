@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import styles from './UserDetailModal.module.scss'
 import classNames from 'classnames/bind'
-import Modal from '../Modal/Modal'
-import DetailForm from '../DetailForm/DetailForm'
+import { useEffect, useState } from 'react'
 import BlockForm from '../BlockForm/BlockForm'
-import { useEffect } from 'react'
-import { setLocale } from 'yup'
+import DetailForm from '../DetailForm/DetailForm'
+import Modal from '../Modal/Modal'
+import styles from './UserDetailModal.module.scss'
 
 const cx = classNames.bind(styles)
 

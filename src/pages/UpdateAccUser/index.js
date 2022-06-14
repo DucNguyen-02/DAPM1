@@ -1,7 +1,6 @@
 import axios from 'axios'
 import classNames from 'classnames/bind'
-import React, { useMemo, useState } from 'react'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PERSON } from '../../assets/images'
 import InfoTable from '../../Components/InfoTable/InfoTable'
 import RegisterModal from '../../Components/RegisterModal/RegisterModal'
@@ -24,36 +23,79 @@ const UpdateAccUser = () => {
             param = 'nnn'
         }
 
-        const resp = await fetch(`http://127.0.0.1:3000/${param}`)
-        const data = await resp.json()
-        setListUser(data)
+        const resp = await axios.get(`http://127.0.0.1:3000/${param}`)
+        setListUser(resp.data)
     }
 
     useEffect(() => {
         fetchUser()
-    }, [indexButton])
+    }, [indexButton, isToggleModal])
 
-    const columns = React.useMemo(
-        () => [
-            {
-                Header: 'CMND/CCCD',
-                accessor: 'CMND', // accessor is the "key" in the data
-            },
-            {
-                Header: 'Tài khoản',
-                accessor: 'tenTaiKhoan',
-            },
-            {
-                Header: 'Họ và tên',
-                accessor: 'hoTen',
-            },
-            {
-                Header: 'Tình trạng',
-                accessor: 'trangThaiTaiKhoan',
-            },
-        ],
-        []
-    )
+    const columns = [
+        React.useMemo(
+            () => [
+                {
+                    Header: 'CMND/CCCD',
+                    accessor: 'CMND', // accessor is the "key" in the data
+                },
+                {
+                    Header: 'Tài khoản',
+                    accessor: 'tenTaiKhoan',
+                },
+                {
+                    Header: 'Họ và tên',
+                    accessor: 'hoTen',
+                },
+                {
+                    Header: 'Tình trạng',
+                    accessor: 'trangThaiTaiKhoan',
+                },
+            ],
+            []
+        ),
+        React.useMemo(
+            () => [
+                {
+                    Header: 'nnn',
+                    accessor: 'CMND', // accessor is the "key" in the data
+                },
+                {
+                    Header: 'Tài khoản',
+                    accessor: 'tenTaiKhoan',
+                },
+                {
+                    Header: 'Họ và tên',
+                    accessor: 'hoTen',
+                },
+                {
+                    Header: 'Tình trạng',
+                    accessor: 'trangThaiTaiKhoan',
+                },
+            ],
+            []
+        ),
+        React.useMemo(
+            () => [
+                {
+                    Header: 'cnct',
+                    accessor: 'CMND', // accessor is the "key" in the data
+                },
+                {
+                    Header: 'Tài khoản',
+                    accessor: 'tenTaiKhoan',
+                },
+                {
+                    Header: 'Họ và tên',
+                    accessor: 'hoTen',
+                },
+                {
+                    Header: 'Tình trạng',
+                    accessor: 'trangThaiTaiKhoan',
+                },
+            ],
+            []
+        ),
+    ]
 
     const buttons = [
         {
@@ -110,7 +152,7 @@ const UpdateAccUser = () => {
                 </button>
             </div>
             <div className={cx('content')}>
-                <InfoTable columns={columns} data={listUser} />
+                <InfoTable columns={columns[indexButton]} data={listUser} />
             </div>
             {isToggleModal && <RegisterModal toggleModal={setIsToggleModal} />}
         </div>
