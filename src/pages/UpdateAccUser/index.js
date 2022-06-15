@@ -57,8 +57,8 @@ const UpdateAccUser = () => {
         React.useMemo(
             () => [
                 {
-                    Header: 'nnn',
-                    accessor: 'CMND', // accessor is the "key" in the data
+                    Header: 'CMND',
+                    accessor: 'soCCCD', // accessor is the "key" in the data
                 },
                 {
                     Header: 'Tài khoản',
@@ -78,8 +78,8 @@ const UpdateAccUser = () => {
         React.useMemo(
             () => [
                 {
-                    Header: 'cnct',
-                    accessor: 'CMND', // accessor is the "key" in the data
+                    Header: 'Mã hộ chiếu',
+                    accessor: 'maHoChieu', // accessor is the "key" in the data
                 },
                 {
                     Header: 'Tài khoản',
@@ -158,6 +158,7 @@ const UpdateAccUser = () => {
                     data={listUser}
                     isDetail={isDetail}
                     setIsDetail={setIsDetail}
+                    indexButton={indexButton}
                 />
             </div>
             {isToggleModal && <RegisterModal toggleModal={setIsToggleModal} />}

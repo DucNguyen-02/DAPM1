@@ -5,26 +5,46 @@ import styles from './BlockForm.module.scss'
 
 const cx = classNames.bind(styles)
 
-const BlockForm = ({ toggleDetail, user }) => {
+const BlockForm = ({ toggleDetail, user, indexButton }) => {
     const handleCloseModal = () => {
         toggleDetail(false)
     }
 
-    const handleBlock = async (id, e) => {
+    const handleBlock = async (user, e) => {
         e.preventDefault()
+        let role =
+            indexButton === 0 ? 'cbql' : indexButton === 1 ? 'cnct' : 'nnn'
+        let id =
+            indexButton === 0
+                ? user.maCanBo
+                : indexButton === 1
+                ? user.maCNCT
+                : user.maHoChieu
         const data = { trangThaiTaiKhoan: 'Bị khóa' }
-
-        const resp = await axios.put(`http://127.0.0.1:3000/cbql/${id}`, data)
+        const resp = await axios.put(
+            `http://127.0.0.1:3000/${role}/${id}`,
+            data
+        )
         console.log(resp)
 
         toggleDetail(false)
     }
 
-    const handleUnblock = async (id, e) => {
+    const handleUnblock = async (user, e) => {
         e.preventDefault()
         const data = { trangThaiTaiKhoan: 'Đang hoạt động' }
-
-        const resp = await axios.put(`http://127.0.0.1:3000/cbql/${id}`, data)
+        let role =
+            indexButton === 0 ? 'cbql' : indexButton === 1 ? 'cnct' : 'nnn'
+        let id =
+            indexButton === 0
+                ? user.maCanBo
+                : indexButton === 1
+                ? user.maCNCT
+                : user.maHoChieu
+        const resp = await axios.put(
+            `http://127.0.0.1:3000/${role}/${id}`,
+            data
+        )
         console.log(resp)
 
         toggleDetail(false)
@@ -83,7 +103,7 @@ const BlockForm = ({ toggleDetail, user }) => {
                 {user.trangThaiTaiKhoan === 'Đang hoạt động' ? (
                     <button
                         onClick={(e) => {
-                            handleBlock(user.maCanBo, e)
+                            handleBlock(user, e)
                         }}
                         className={cx('content-btn', 'content-btn-save')}
                     >
@@ -92,7 +112,7 @@ const BlockForm = ({ toggleDetail, user }) => {
                 ) : (
                     <button
                         onClick={(e) => {
-                            handleUnblock(user.maCanBo, e)
+                            handleUnblock(user, e)
                         }}
                         className={cx('content-btn', 'content-btn-save')}
                     >

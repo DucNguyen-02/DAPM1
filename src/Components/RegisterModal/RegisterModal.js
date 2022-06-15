@@ -99,14 +99,17 @@ const RegisterModal = ({ toggleModal }) => {
     const generateID = () => {
         const rand = Math.floor(Math.random() * 10000)
         const lengthOfRandNumber = rand.toString().split('').length
-        if (lengthOfRandNumber === 1) {
-            return `CBQL000${rand}`
-        } else if (lengthOfRandNumber === 2) {
-            return `CBQL00${rand}`
-        } else if (lengthOfRandNumber === 3) {
-            return `CBQL0${rand}`
-        } else {
-            return `CBQL${rand}`
+        switch (lengthOfRandNumber) {
+            case 1:
+                return `CBQL000${rand}`
+            case 2:
+                return `CBQL00${rand}`
+            case 3:
+                return `CBQL0${rand}`
+            case 4:
+                return `CBQL${rand}`
+            default:
+                return
         }
     }
 

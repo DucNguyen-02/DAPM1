@@ -7,12 +7,16 @@ import styles from './UserDetailModal.module.scss'
 
 const cx = classNames.bind(styles)
 
-const UserDetailModal = ({ toggleDetail, userIdDetail }) => {
+const UserDetailModal = ({ toggleDetail, userIdDetail, indexButton }) => {
     const [isDetail, setIsDetail] = useState(true)
     const [user, setUser] = useState()
 
     const fetchUserByID = async () => {
-        const resp = await fetch(`http://localhost:3000/cbql/${userIdDetail}`)
+        let role =
+            indexButton === 0 ? 'cbql' : indexButton === 1 ? 'cnct' : 'nnn'
+        const resp = await fetch(
+            `http://localhost:3000/${role}/${userIdDetail}`
+        )
         const data = await resp.json()
         setUser(data)
     }
@@ -59,7 +63,11 @@ const UserDetailModal = ({ toggleDetail, userIdDetail }) => {
                     {isDetail ? (
                         <DetailForm toggleDetail={toggleDetail} user={user} />
                     ) : (
-                        <BlockForm toggleDetail={toggleDetail} user={user} />
+                        <BlockForm
+                            toggleDetail={toggleDetail}
+                            user={user}
+                            indexButton={indexButton}
+                        />
                     )}
                 </div>
             </div>

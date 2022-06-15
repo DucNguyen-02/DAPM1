@@ -9,14 +9,12 @@ const cx = classNames.bind(styles)
 const renderDataTable = (cell, header) => {
     switch (header) {
         case 'CMND':
-            return <div dangerouslySetInnerHTML={{ __html: cell.value }} />
         case 'nnn':
-            return <div dangerouslySetInnerHTML={{ __html: cell.value }} />
         case 'cnct':
-            return <div dangerouslySetInnerHTML={{ __html: cell.value }} />
+        case 'soCCCD':
         case 'tenTaiKhoan':
-            return <div dangerouslySetInnerHTML={{ __html: cell.value }} />
         case 'hoTen':
+        case 'maHoChieu':
             return <div dangerouslySetInnerHTML={{ __html: cell.value }} />
         case 'trangThaiTaiKhoan':
             return (
@@ -34,7 +32,7 @@ const renderDataTable = (cell, header) => {
     }
 }
 
-const InfoTable = ({ columns, data, isDetail, setIsDetail }) => {
+const InfoTable = ({ columns, data, isDetail, setIsDetail, indexButton }) => {
     const [userIdDetail, setUserIdDetail] = useState()
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
         useTable({ columns, data })
@@ -43,9 +41,15 @@ const InfoTable = ({ columns, data, isDetail, setIsDetail }) => {
         data,
     ])
 
-    const handleRowItemClick = (idUser) => {
+    const handleRowItemClick = (original) => {
+        if (indexButton === 0) {
+            setUserIdDetail(original.maCanBo)
+        } else if (indexButton === 1) {
+            setUserIdDetail(original.maCNCT)
+        } else {
+            setUserIdDetail(original.maHoChieu)
+        }
         setIsDetail(true)
-        setUserIdDetail(idUser)
     }
 
     return (
@@ -88,7 +92,7 @@ const InfoTable = ({ columns, data, isDetail, setIsDetail }) => {
                                     key={row.id}
                                     className="table-row"
                                     onClick={() =>
-                                        handleRowItemClick(row.original.maCanBo)
+                                        handleRowItemClick(row.original)
                                     }
                                 >
                                     {row.cells.map((cell) => {
@@ -126,6 +130,7 @@ const InfoTable = ({ columns, data, isDetail, setIsDetail }) => {
                 <UserDetailModal
                     toggleDetail={setIsDetail}
                     userIdDetail={userIdDetail}
+                    indexButton={indexButton}
                 />
             )}
         </div>
