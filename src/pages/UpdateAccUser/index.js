@@ -61,6 +61,10 @@ const UpdateAccUser = () => {
                     accessor: 'soCCCD', // accessor is the "key" in the data
                 },
                 {
+                    Header: 'Tên CSLT',
+                    accessor: 'tenCSLT',
+                },
+                {
                     Header: 'Tài khoản',
                     accessor: 'tenTaiKhoan',
                 },
@@ -88,6 +92,10 @@ const UpdateAccUser = () => {
                 {
                     Header: 'Họ và tên',
                     accessor: 'hoTen',
+                },
+                {
+                    Header: 'Quốc tịch',
+                    accessor: 'tenQuocTich',
                 },
                 {
                     Header: 'Tình trạng',

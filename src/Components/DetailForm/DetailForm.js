@@ -58,7 +58,9 @@ const DetailForm = ({ toggleDetail, user }) => {
                         <div className={cx('content-wrapper', 'col-xl-5')}>
                             <div className={cx('label')}>CMND/CCCD:</div>
                             <span className={cx('content-detail')}>
-                                {user ? user.CMND : ''}
+                                {user
+                                    ? user.CMND || user.maHoChieu || user.soCCCD
+                                    : ''}
                             </span>
                         </div>
                     </div>

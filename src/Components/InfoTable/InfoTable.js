@@ -15,6 +15,8 @@ const renderDataTable = (cell, header) => {
         case 'tenTaiKhoan':
         case 'hoTen':
         case 'maHoChieu':
+        case 'tenCSLT':
+        case 'tenQuocTich':
             return <div dangerouslySetInnerHTML={{ __html: cell.value }} />
         case 'trangThaiTaiKhoan':
             return (

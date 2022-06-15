@@ -1,11 +1,14 @@
 import axios from 'axios'
 
 import classNames from 'classnames/bind'
+import { useState } from 'react'
 import styles from './BlockForm.module.scss'
 
 const cx = classNames.bind(styles)
 
 const BlockForm = ({ toggleDetail, user, indexButton }) => {
+    const [reason, setReason] = useState()
+
     const handleCloseModal = () => {
         toggleDetail(false)
     }
@@ -20,7 +23,7 @@ const BlockForm = ({ toggleDetail, user, indexButton }) => {
                 : indexButton === 1
                 ? user.maCNCT
                 : user.maHoChieu
-        const data = { trangThaiTaiKhoan: 'Bị khóa' }
+        const data = { trangThaiTaiKhoan: 'Bị khóa', reason: reason }
         const resp = await axios.put(
             `http://127.0.0.1:3000/${role}/${id}`,
             data
@@ -32,7 +35,7 @@ const BlockForm = ({ toggleDetail, user, indexButton }) => {
 
     const handleUnblock = async (user, e) => {
         e.preventDefault()
-        const data = { trangThaiTaiKhoan: 'Đang hoạt động' }
+        const data = { trangThaiTaiKhoan: 'Đang hoạt động', reason: null }
         let role =
             indexButton === 0 ? 'cbql' : indexButton === 1 ? 'cnct' : 'nnn'
         let id =
@@ -88,14 +91,16 @@ const BlockForm = ({ toggleDetail, user, indexButton }) => {
                     </div>
                     <div className={cx('content-wrapper')}>
                         <label className="form-label">Lý do</label>
-                        <select
+                        <input
                             className="form-control"
-                            name="reason"
-                            id="reason"
-                        >
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </select>
+                            type="text"
+                            placeholder="Lý do"
+                            disabled={
+                                user.trangThaiTaiKhoan !== 'Đang hoạt động'
+                            }
+                            value={user.reason || reason}
+                            onChange={(e) => setReason(e.target.value)}
+                        />
                     </div>
                 </div>
             </div>
