@@ -30,7 +30,7 @@ const UpdateAccUser = () => {
 
     useEffect(() => {
         fetchUser()
-    }, [indexButton, isDetail])
+    }, [indexButton, isDetail, isToggleModal])
 
     const columns = [
         React.useMemo(
