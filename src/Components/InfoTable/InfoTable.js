@@ -17,6 +17,7 @@ const renderDataTable = (cell, header) => {
         case 'maHoChieu':
         case 'tenCSLT':
         case 'tenQuocTich':
+        case 'soDienThoai':
             return <div dangerouslySetInnerHTML={{ __html: cell.value }} />
         case 'trangThaiTaiKhoan':
             return (
@@ -92,7 +93,7 @@ const InfoTable = ({ columns, data, isDetail, setIsDetail, indexButton }) => {
                                 <tr
                                     {...row.getRowProps()}
                                     key={row.id}
-                                    className="table-row"
+                                    className={cx('table-row')}
                                     onClick={() =>
                                         handleRowItemClick(row.original)
                                     }

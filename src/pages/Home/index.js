@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 import { LOGO } from '../../assets/images'
 import getDataFromLocalStorage from '../../helper/getDataFromLocalStorage'
 import { useNavigate } from 'react-router-dom'
+import Title from '../../utils/Title'
 
 const cx = classNames.bind(styles)
 
@@ -18,6 +19,7 @@ const Home = () => {
 
     return (
         <div className={cx('wrapper ')}>
+            <Title title="Quản lý người nước ngoài" />
             <div className={cx('content')}>
                 <div className={cx('content-img')}>
                     <img src={LOGO} alt="" />

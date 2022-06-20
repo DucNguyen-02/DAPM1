@@ -16,6 +16,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 20px;
 
     &-button {
         border-radius: 20px;
@@ -54,6 +55,11 @@
 
     &-title {
         color: #197bbd;
+    }
+
+    &-disabled {
+        opacity: 0.9;
+        background-color: #ccc;
     }
 }
 

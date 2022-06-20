@@ -19,7 +19,8 @@ const schema = yup.object().shape({
     password: yup.string().required('Vui lòng nhập vào trường này'),
     phone: yup
         .string()
-        .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'invalid Phone number'),
+        .required('Vui lòng nhập vào trường này')
+        .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/, 'Chưa đúng định dạng'),
     email: yup.string().required('Vui lòng nhập vào trường này'),
     CMND: yup.string().required('Vui lòng nhập vào trường này'),
     address: yup.string().required('Vui lòng nhập vào trường này'),
@@ -112,7 +113,6 @@ const RegisterModal = ({ toggleModal }) => {
                 return
         }
     }
-
     const onSubmit = async (data) => {
         await axios
             .post('http://127.0.0.1:3000/cbql', {
@@ -130,7 +130,12 @@ const RegisterModal = ({ toggleModal }) => {
                 trangThaiTaiKhoan: 'Đang hoạt động',
             })
             .then(function (response) {
-                handleCancelForm()
+                const status = response.data.message
+                if (status === 'duplicate!') {
+                    alert('Trùng CMND')
+                } else {
+                    handleCancelForm()
+                }
             })
             .catch(function (error) {
                 console.log(error)
@@ -209,9 +214,9 @@ const RegisterModal = ({ toggleModal }) => {
                                     Số điện thoại:{' '}
                                 </label>
                                 <input
-                                    className="form-control"
                                     name="phone"
                                     {...register('phone')}
+                                    className="form-control"
                                 />
                                 {
                                     <h6 className="text-danger form-text text-capitalize">
@@ -234,7 +239,7 @@ const RegisterModal = ({ toggleModal }) => {
                                 />
                                 {errors.password && (
                                     <h6 className="text-danger form-text text-capitalize">
-                                        {errors.phone.type === 'required'
+                                        {errors.password.type === 'required'
                                             ? 'This field is required'
                                             : errors.password.message}
                                     </h6>

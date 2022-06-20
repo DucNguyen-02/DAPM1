@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { PERSON } from '../../assets/images'
 import InfoTable from '../../Components/InfoTable/InfoTable'
 import RegisterModal from '../../Components/RegisterModal/RegisterModal'
+import Title from '../../utils/Title'
 import styles from './UpdateAccUser.module.scss'
 
 const cx = classNames.bind(styles)
@@ -46,6 +47,10 @@ const UpdateAccUser = () => {
                 {
                     Header: 'Họ và tên',
                     accessor: 'hoTen',
+                },
+                {
+                    Header: 'Số điện thoại',
+                    accessor: 'soDienThoai',
                 },
                 {
                     Header: 'Tình trạng',
@@ -127,6 +132,8 @@ const UpdateAccUser = () => {
 
     return (
         <div className={cx('wrapper')}>
+            <Title title="Quản lý tài khoản người dùng" />
+
             <div className={cx('header')}>
                 <img src={PERSON} alt="" />
                 <h4 className={cx('title')}>Cập nhật tài khoản người dùng</h4>
@@ -153,12 +160,22 @@ const UpdateAccUser = () => {
                     })}
                 </div>
 
-                <button
-                    onClick={handleToggleModal}
-                    className={cx('select-btn', 'select-addnew')}
-                >
-                    Thêm mới
-                </button>
+                {indexButton === 0 ? (
+                    <button
+                        onClick={handleToggleModal}
+                        className={cx('select-btn', 'select-addnew')}
+                    >
+                        Thêm mới
+                    </button>
+                ) : (
+                    <button
+                        onClick={handleToggleModal}
+                        className={cx('select-btn', 'select-disabled')}
+                        disabled
+                    >
+                        Thêm mới
+                    </button>
+                )}
             </div>
             <div className={cx('content')}>
                 <InfoTable

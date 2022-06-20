@@ -1,7 +1,13 @@
 import React from 'react'
 import styles from './Sidebar.module.scss'
 import classNames from 'classnames/bind'
-import { BACKGROUND_SIDEBAR, LOGO, PERSON } from '../../assets/images'
+import {
+    BACKGROUND_SIDEBAR,
+    LOGO,
+    PERSON,
+    SEARCH,
+    TREND,
+} from '../../assets/images'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -19,20 +25,14 @@ const Sidebar = () => {
         {
             id: 1,
             path: '/searchinfo',
-            img: PERSON,
+            img: SEARCH,
             title: 'Tra cứu thông tin',
         },
         {
             id: 2,
             path: '/statistic',
-            img: PERSON,
+            img: TREND,
             title: 'Thống kê - Báo cáo',
-        },
-        {
-            id: 3,
-            path: '/changepassword',
-            img: PERSON,
-            title: 'Đổi mật khẩu',
         },
     ]
 
@@ -61,7 +61,7 @@ const Sidebar = () => {
                                     active: activeBtn === item.id,
                                 })}
                             >
-                                <img src={PERSON} alt="" />
+                                <img src={item.img} alt="" />
                                 <div className={cx('content-title')}>
                                     {item.title}
                                 </div>

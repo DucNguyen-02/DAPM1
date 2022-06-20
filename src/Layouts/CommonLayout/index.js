@@ -13,11 +13,7 @@ const CommonLayout = ({ children }) => {
             <Sidebar />
             <div className={cx('container')}>
                 <Header />
-                <img
-                    className={cx('backgroundimg')}
-                    src={BACKGROUND_CONTENT}
-                    alt=""
-                />
+
                 <div className={cx('content')}>{children}</div>
             </div>
         </div>
