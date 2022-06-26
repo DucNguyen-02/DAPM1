@@ -11,8 +11,8 @@ import styles from './Login.module.scss'
 const cx = classNames.bind(styles)
 
 const schema = yup.object().shape({
-    username: yup.string().required(),
-    password: yup.string().required(),
+    username: yup.string().required('Vui lòng nhập tài khoản'),
+    password: yup.string().required('Vui lòng nhập mật khẩu'),
 })
 
 const Login = () => {

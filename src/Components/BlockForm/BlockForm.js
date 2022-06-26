@@ -23,7 +23,11 @@ const BlockForm = ({ toggleDetail, user, indexButton }) => {
                 : indexButton === 1
                 ? user.maCNCT
                 : user.maHoChieu
-        const data = { trangThaiTaiKhoan: 'Bị khóa', reason: reason }
+        const data = {
+            trangThaiTaiKhoan: 'Bị khóa',
+            reason: reason,
+            email: user && user.email,
+        }
         const resp = await axios.put(
             `http://127.0.0.1:3000/${role}/${id}`,
             data
@@ -35,7 +39,11 @@ const BlockForm = ({ toggleDetail, user, indexButton }) => {
 
     const handleUnblock = async (user, e) => {
         e.preventDefault()
-        const data = { trangThaiTaiKhoan: 'Đang hoạt động', reason: null }
+        const data = {
+            trangThaiTaiKhoan: 'Đang hoạt động',
+            reason: null,
+            email: user && user.email,
+        }
         let role =
             indexButton === 0 ? 'cbql' : indexButton === 1 ? 'cnct' : 'nnn'
         let id =
